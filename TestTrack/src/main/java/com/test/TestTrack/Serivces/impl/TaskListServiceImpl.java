@@ -3,6 +3,7 @@ package com.test.TestTrack.Serivces.impl;
 import com.test.TestTrack.Repository.TaskListRepository;
 import com.test.TestTrack.Serivces.TaskListServices;
 import com.test.TestTrack.domain.entity.TaskList;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -67,7 +68,7 @@ public class TaskListServiceImpl implements TaskListServices {
             existiignTaskList.setUpdated(LocalDateTime.now());
             return taskListRepository.save(existiignTaskList);
     }
-
+    @Transactional
     @Override
     public void deleteTaskListById(UUID id) {
         taskListRepository.deleteById(id);

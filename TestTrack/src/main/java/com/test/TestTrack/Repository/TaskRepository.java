@@ -8,7 +8,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface TaskRepository extends JpaRepository<Task, Integer> {
+public interface TaskRepository extends JpaRepository<Task, UUID> {
     List <Task> findByTaskListId(UUID taskListId);
     Optional<Task> findByTaskListIdAndId(UUID taskId,UUID taskListId);
+    void deleteByTaskListIdAndId(UUID taskListId,UUID taskId);
 }
