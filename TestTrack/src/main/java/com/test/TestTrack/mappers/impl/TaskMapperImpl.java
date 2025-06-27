@@ -1,7 +1,8 @@
-package com.test.TestTrack.mappers;
+package com.test.TestTrack.mappers.impl;
 
 import com.test.TestTrack.domain.dto.TaskDto;
 import com.test.TestTrack.domain.entity.Task;
+import com.test.TestTrack.mappers.TaskMapper;
 import org.springframework.stereotype.Component;
 
 @Component

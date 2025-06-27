@@ -1,5 +1,5 @@
 package com.test.TestTrack.domain.entity;
 
-public enum TestTrack {
+public enum TaskStatus {
     OPEN,CLOSED
 }
