@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -48,5 +49,28 @@ public class TaskListServiceImpl implements TaskListServices {
     @Override
     public Optional<TaskList> getTaskListById(UUID id) {
         return taskListRepository.findById(id);
+    }
+
+    @Override
+    public TaskList updateTaskList(TaskList taskList, UUID id) {
+       if(null == taskList.getId()){
+           throw new IllegalArgumentException("tasklist must have an id ");
+       }
+       if(!Objects.equals(taskList.getId(), id)){
+           throw new IllegalArgumentException("tasklist already has an id ");
+       }
+
+       TaskList existiignTaskList =taskListRepository.findById(id).orElseThrow(()->
+               new IllegalArgumentException("tasklist does not exist"));
+            existiignTaskList.setTitle(taskList.getTitle());
+            existiignTaskList.setDescription(taskList.getDescription());
+            existiignTaskList.setUpdated(LocalDateTime.now());
+            return taskListRepository.save(existiignTaskList);
+    }
+
+    @Override
+    public void deleteTaskListById(UUID id) {
+        taskListRepository.deleteById(id);
+
     }
 }

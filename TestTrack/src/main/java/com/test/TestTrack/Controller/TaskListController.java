@@ -1,6 +1,7 @@
 package com.test.TestTrack.Controller;
 
 
+import com.sun.source.util.TaskListener;
 import com.test.TestTrack.Serivces.TaskListServices;
 import com.test.TestTrack.domain.dto.TaskListDto;
 import com.test.TestTrack.domain.entity.TaskList;
@@ -47,4 +48,19 @@ public class TaskListController {
                 .map(taskListMapper::toDto);
     }
 
+    @PutMapping(path = "/{task_list_id}")
+    public TaskListDto updateTaskList( @RequestBody TaskListDto taskListDto,@PathVariable("task_list_id")UUID id
+                                     ) {
+
+        TaskList updatedTaskList =taskListServices.updateTaskList(
+                taskListMapper.fromDto(taskListDto),
+                id
+
+        );
+        return taskListMapper.toDto(updatedTaskList);
+    }
+    @DeleteMapping(path ="/{task_list_id}" )
+    public void deleteTaskList(@PathVariable("task_list_id")UUID id) {
+        taskListServices.deleteTaskListById(id);
+    }
 }
